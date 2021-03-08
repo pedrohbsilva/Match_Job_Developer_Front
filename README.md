@@ -17,7 +17,7 @@ Após a configuração, execute o comando yarn start para inicializar o software
 
 A SPA foi disponibilizado online via Netlify e pode ser visualizado em:
 
-//Indisponível no momento
+https://quizzical-engelbart-189acb.netlify.app/
 
 Está aplicação utiliza como base de dados a url https://lit-citadel-12163.herokuapp.com/
 que está disponível para consulta no repositório: https://github.com/pedrohbsilva/match_job_developer_api
