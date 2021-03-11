@@ -1,6 +1,8 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import { InputLabel, Select, MenuItem } from '@material-ui/core';
 import Slider from '@material-ui/core/Slider';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import {
   ContainerFilter,
   FormControlFilter,
@@ -10,7 +12,6 @@ import {
 import { FilterProps } from '../../interfaces';
 import api from '../../services/api';
 import { useMatchJobDeveloper } from '../../hooks';
-
 /**
  * @summary Component that generates the filters of city, technology, time of experience and remote work.
  * @return {React.ReactElement} Returns filters for city, technology, time of experience and remote work.
@@ -22,13 +23,11 @@ const Filters = (): React.ReactElement => {
   const {
     acceptRemote,
     setAcceptRemote,
-    city,
     setCity,
     minExperience,
     setMinExperience,
     maxExperience,
     setMaxExperience,
-    technologies,
     setTechnologies,
   } = useMatchJobDeveloper();
 
@@ -91,46 +90,36 @@ When this function is executed, it updates the value state, and executes the Han
 
   return (
     <ContainerFilter>
-      <TextTitleFilter>
+      <TextTitleFilter data-testid="candidates-job">
         <span>Candidatos</span>
         para sua vaga
       </TextTitleFilter>
       <ContainerFilterItem>
         <FormControlFilter>
-          <InputLabel>Tecnologia</InputLabel>
-          <Select
-            value={technologies}
-            onChange={(e: React.ChangeEvent<{ value: unknown }>) => {
-              setTechnologies(e.target.value as number);
+          <Autocomplete
+            id="technologies"
+            options={technologyFilter}
+            getOptionLabel={(option) => option.name}
+            renderInput={(params) => (
+              <TextField {...params} label="Tecnologia" variant="outlined" />
+            )}
+            onChange={(event, newValue) => {
+              setTechnologies(newValue?.id as number);
             }}
-          >
-            <MenuItem value={0}>
-              <em>Nenhuma</em>
-            </MenuItem>
-            {technologyFilter.map((tech) => (
-              <MenuItem key={tech.id} value={tech.id}>
-                {tech.name}
-              </MenuItem>
-            ))}
-          </Select>
+          />
         </FormControlFilter>
         <FormControlFilter>
-          <InputLabel>Cidade</InputLabel>
-          <Select
-            value={city}
-            onChange={(e: React.ChangeEvent<{ value: unknown }>) => {
-              setCity(e.target.value as number);
+          <Autocomplete
+            id="city"
+            options={citiesFilter}
+            getOptionLabel={(option) => option.name}
+            renderInput={(params) => (
+              <TextField {...params} label="Cidade" variant="outlined" />
+            )}
+            onChange={(event, newValue) => {
+              setCity(newValue?.id as number);
             }}
-          >
-            <MenuItem value={0}>
-              <em>Nenhuma</em>
-            </MenuItem>
-            {citiesFilter.map((cityFilter) => (
-              <MenuItem key={cityFilter.id} value={cityFilter.id}>
-                {cityFilter.name}
-              </MenuItem>
-            ))}
-          </Select>
+          />
         </FormControlFilter>
         <FormControlFilter>
           <InputLabel>Aceita trabalho remoto?</InputLabel>

@@ -8,10 +8,9 @@ import {
   ContainerTextMessage,
   TextStyle,
 } from './styles';
-import LoadingComponent from '../../components/Loading';
-import * as LoadingAnimation from '../../assets/loading.json';
 import { useMatchJobDeveloper } from '../../hooks';
 import Filters from '../../components/Filters';
+import CardLoading from '../../components/Shimmer/CardLoading';
 
 /**
  * @summary If the description is long, write your summary here. Otherwise, feel free to remove this.
@@ -45,7 +44,9 @@ const MatchCandidates = (): React.ReactElement => {
       );
       setMessage(response.data[0].message);
       setResults(response.data[1].candidates);
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
     };
     searchCandidates();
   }, [acceptRemote, city, minExperience, maxExperience, technologies]);
@@ -54,11 +55,15 @@ const MatchCandidates = (): React.ReactElement => {
     return (
       <>
         <Filters />
-        <LoadingComponent
-          animation={LoadingAnimation}
-          width={300}
-          height={300}
-        />
+        <Container>
+          <ContainerCardBox>
+            <CardLoading />
+            <CardLoading />
+            <CardLoading />
+            <CardLoading />
+            <CardLoading />
+          </ContainerCardBox>
+        </Container>
       </>
     );
   }
@@ -75,7 +80,7 @@ const MatchCandidates = (): React.ReactElement => {
     <>
       <Filters />
       <Container>
-        <TextStyle>
+        <TextStyle data-testid="result-candidates-job">
           Encontramos
           <span>
             {results.length}{' '}

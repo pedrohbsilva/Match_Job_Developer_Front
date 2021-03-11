@@ -35,44 +35,48 @@ const Card = ({
   technologies,
 }: CardProps): React.ReactElement => {
   return (
-    <ContainerCard>
-      <ImgCard src={candidatePhoto} alt="Candidate_image" />
-      <NameCard>
-        Nome: <b>{candidateName}</b>
-        {' - '}
-        id: <b>{candidateId}</b>
-      </NameCard>
-      <TextCard>
-        Aceita trabalhar remoto?
-        <b>{acceptRemote ? ' Sim' : ' Não'}</b>
-      </TextCard>
-      <TextCard>
-        Localidade: <b>{cityName}</b>
-      </TextCard>
-      <TextCard>
-        Tempo de experiência: entre {experience}{' '}
-        {experience === '0-1' ? 'ano' : 'anos'}
-      </TextCard>
-      <FooterCard>
-        {technologies.map((tech) => (
-          <FooterCardItems
-            key={tech.name}
-            style={{
-              background: tech.is_main_tech
-                ? 'var(--lightGreen)'
-                : 'var(--lightGrey)',
-            }}
-            title={
-              tech.is_main_tech
-                ? 'Tecnologia principal do candidato'
-                : 'Tecnologia secundária do candidato'
-            }
-          >
-            <FooterCardText>{tech.name}</FooterCardText>
-          </FooterCardItems>
-        ))}
-      </FooterCard>
-    </ContainerCard>
+    <>
+      <ContainerCard>
+        <ImgCard src={candidatePhoto} alt="Candidate_image" />
+        <NameCard>
+          Nome: <b>{candidateName}</b>
+          {' - '}
+          id: <b>{candidateId}</b>
+        </NameCard>
+        <TextCard>
+          Aceita trabalhar remoto?
+          <b>{acceptRemote ? ' Sim' : ' Não'}</b>
+        </TextCard>
+        <TextCard>
+          Localidade: <b>{cityName}</b>
+        </TextCard>
+        <TextCard>
+          Tempo de experiência: entre {experience}{' '}
+          {experience === '0-1' ? 'ano' : 'anos'}
+        </TextCard>
+        <FooterCard>
+          {technologies.map((tech) => (
+            <FooterCardItems
+              key={tech.name}
+              data-testid="tech"
+              style={{
+                background: tech.is_main_tech
+                  ? 'var(--blueViolet)'
+                  : 'var(--lightGrey)',
+                color: tech.is_main_tech ? 'var(--white)' : 'var(--black)',
+              }}
+              title={
+                tech.is_main_tech
+                  ? 'Tecnologia principal do candidato'
+                  : 'Tecnologia secundária do candidato'
+              }
+            >
+              <FooterCardText>{tech.name}</FooterCardText>
+            </FooterCardItems>
+          ))}
+        </FooterCard>
+      </ContainerCard>
+    </>
   );
 };
 

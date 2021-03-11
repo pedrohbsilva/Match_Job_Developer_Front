@@ -10,12 +10,12 @@ export const ContainerCard = styled.div`
   width: 220px;
   height: 300px;
   border-radius: 8px;
-  box-shadow: 0 0 7px 0px var(--blueViolet);
+  box-shadow: 0 0 3px 0px var(--blueViolet);
   transition: 0.5s;
   margin-top: 70px;
 
   &:hover {
-    box-shadow: 0 0 14px 7px var(--blueViolet);
+    box-shadow: 0 0 7px 1px var(--blueViolet);
   }
 `;
 
@@ -54,7 +54,7 @@ export const FooterCardItems = styled.div`
   border-radius: 4px;
 
   &:hover {
-    box-shadow: 0 0 5px 1px black;
+    box-shadow: 0 0 5px 1px var(--black);
   }
 `;
 

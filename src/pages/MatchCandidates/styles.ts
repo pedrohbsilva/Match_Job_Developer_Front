@@ -37,7 +37,7 @@ export const ContainerTextMessage = styled.h1`
 export const TextStyle = styled.p`
   margin: 8px;
   font-size: 18px;
-  span{
+  span {
     margin-right: 8px;
     margin-left: 8px;
     color: var(--blueViolet);
